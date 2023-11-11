@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="ru">
 
@@ -197,19 +198,21 @@
 
 <body>
     <div>
-        <image href="">
-
-
-            {% if url %}
+        {% if url %}
             {%if type%}
             <div class="logo" style="color:  #dc1a1a;">Doolo</div>
             {% else %}
             <div class="logo" style="color: #20eb90;">Doolo</div>
             {% endif %}
-            <img src="{{url}}" class="image-bounding" alt="Italian Trulli" style="color: #c72121;">
+            {%if showtype == 0 %}
+            <img src="{{url}}" class="image-bounding" alt="image" style="color: #c72121;">
+            {% elif showtype == 1 %}
+            <img src="{%static url %}" class="image-bounding" alt="image" style="color: #c72121;">
+            {% endif %}
             {% else %}
             <div class="logo">Doolo</div>
             {% endif %}
+
             <div style="max-width: 700px; margin-left: auto; margin-right: auto; padding: 15px;">
 
                 <form action="." method="post">
@@ -223,18 +226,12 @@
 
                 <label for="images" class="drop-container" id="dropcontainer">
 
-                    <form action="." method="post">
-                        <button type="send" class="send-button"> Send </button>
+                    <form action="." method="post" enctype="multipart/form-data">
                         {% csrf_token %}
+                        <button type="send" class="send-button"> Send </button>
                         {{fform}}
                     </form>
                 </label>
-
-
-                <!-- <p>Загрузите ваши фотографии на сервер</p>
-   <p><input type="file" name="photo" multiple accept="image/*,image/jpeg">
-   <input type="submit" value="Отправить"></p> -->
-
             </div>
     </div>
 
