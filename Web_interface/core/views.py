@@ -63,7 +63,7 @@ def url_page(request):
                 handler.write(img_data)
 
             image_classified_url = image_url
-            image_classified_type = int(weapon_detector.Process(image_url, IMAGES_FILEPATH))+1
+            image_classified_type = int(weapon_detector.Process(image_url, IMAGES_FILEPATH)) + 1
             #
 
         #Если отправлен файл
@@ -74,14 +74,13 @@ def url_page(request):
             filename = request.FILES['file'].name
             image_url = IMAGES_FILEPATH + filename
             handle_uploaded_file(file)
-            # ссылка на картинку с квадратиком, можно имя файлом лежащим в IMAGES_FILEPATH (Тут кодит арсений)
+            # predict 
             image_classified_type = int(weapon_detector.Process(image_url, IMAGES_FILEPATH)) + 1
             #удаляем файлик
-            os.system('rm ' + image_url.replace(' ', '\ '))
+            os.remove(image_url.replace(' ', '\ '))
             #
 
         image_names = [f"image{i+1}.jpg" for i in range(IMAGES_AMOUNT)]
-        print(image_names, image_classified_type)
         return render(request, "frontpage.html", {"form": form, "fform" : fform, "showtype" : image_classified_type, "images" : image_names})
     
     return render(request, "frontpage.html", {"form": form, "fform" : fform})

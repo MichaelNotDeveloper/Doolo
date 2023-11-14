@@ -15,10 +15,13 @@ class WeaponDetector:
         frame_index = 0
         results = []
         while True:
+                        
             ret, frame = capture.read()
             if not ret:
                 break
+            
             if frame_index % every_kth_frame:
+                frame_index += 1
                 continue
 
             predicted = self.model(frame, size=640)
@@ -26,13 +29,13 @@ class WeaponDetector:
             if torch.isnan(torch.tensor([conf]))[0]:
                 conf = 0
             results.append((conf, predicted))
-        
+            
             frame_index += 1
+        
 
         results.sort(key = lambda x : x[0], reverse=True)
-
         results = results[:5]
-        
+    
         if 0 < len(results) < 5:
             results += [results[-1]]*(5 - len(results))
 
