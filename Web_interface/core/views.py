@@ -65,7 +65,7 @@ def url_page(request):
             image_classified_url = image_url
             image_classified_type = int(weapon_detector.Process(image_url, IMAGES_FILEPATH)) + 1
             #
-
+            
         #Если отправлен файл
         else:
             form = InputUrlForm()
