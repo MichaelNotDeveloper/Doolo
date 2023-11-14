@@ -9,7 +9,8 @@
 
 <img width="569" alt="image" src="https://github.com/MichaelNotDeveloper/Doolo/assets/59076182/00c394b8-1b85-4ffc-8af1-fe1bda2e1789">
 
-Don't forget to  install python3 and libs
+Для корректной работы нужно установить библиотеки
+-
 ```
 pip3 install django cv2 torch numpy
 ```
